@@ -1,0 +1,237 @@
+/*the CSS file for hw3.html*/
+
+#all{
+	width:1170px;
+	height:1200px;
+	
+	font-family: Arial, Helvetica;
+}
+
+/*No.13*/
+table.black1 {
+	color:white;
+	background-color:black;
+	width:430px;
+	height:263px;
+	
+	position: relative;
+    left: 370px;
+	top:42px;
+}
+tr.black1_tr{
+	font-size:10px;
+}
+
+#loc_text{
+	font-size:15px;
+	text-align:center;
+	letter-spacing:4px;
+	padding-top:25px;
+	padding-bottom:15px;
+	border-bottom:1px solid white;
+}
+#no_text{
+	font-size:59px;
+	text-align:right;
+	vertical-align:top;
+	padding-top:15px;
+	padding-left:10px;
+	text-decoration:underline;
+}
+#num_text{
+	font-size:112px;
+	font-family:arial, serif;
+	font-weight:550;
+	text-align:left;
+	vertical-align:top;
+	padding-top:5px;
+	text-decoration:none;
+}
+a._no13:link, a._no13:visited, a._no13:hover, a._no13:active {
+    color: white;
+	text-decoration:none;
+}
+
+/*sayhello*/
+img{
+	position:absolute;
+	left:0px;
+	top:350px;
+	
+	width:1170px;
+	/*height:180px;*/
+}
+#int_text{
+	position:absolute;
+	top:444px;
+	left:390px;
+	
+	font-size:15px;
+	letter-spacing:4px;
+	color:rgb(181,155,74);
+}
+#we1_text{
+	position:absolute;
+	top:484px;
+	left:277px;
+	font-size:18px;	
+}
+#we2_text{
+	position:absolute;
+	top:508px;
+	left:380px;
+	font-size:18px;	
+}
+
+/*getintouch*/
+a._touch:link, a._touch:visited{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    text-align: center;
+	text-decoration:none;
+    display: inline-block;
+}
+
+a._touch:hover, a._touch:active {
+    background-color: black;
+    color: white;
+}
+#get{
+	position:absolute;
+	top:570px;
+	left:440px;
+	
+	font-size:12px;
+	letter-spacing:4px;
+    padding: 14px 70px 14px 70px;
+}
+
+/*article&signup*/
+table.black2{
+	position:absolute;
+	top:717px;
+	
+	width:1170px;
+	height:205px;
+	
+	color:white;
+	background-color:black;
+}
+#read_td{
+	color:white;
+	font-size:12px;
+	letter-spacing:3px;
+	text-decoration:none;
+	text-align:center;
+	border-right:1px solid gray;
+	padding:0px 30px 0px 30px;
+}
+a._article:link, a._article:visited, a._article:active {
+    color: white;
+	text-decoration:none;
+}
+a._article:hover{
+	color:white;
+	text-decoration:underline;
+}
+
+#sign_td{
+	font-size:12px;
+	text-align:right;
+	letter-spacing:4px;
+	color:rgb(181,155,74);
+	padding: 10px 5px 5px;
+}
+#sign{
+	padding-right:35px;
+	padding-bottom:3px;
+}
+input[type=text] {
+    width:316px;
+	height:50px;
+    box-sizing:border-box;
+    border:1px solid #ccc;
+    font-size:18px;
+    background-color:white; 
+    padding:2px 20px 2px 6px;
+}
+
+a._sign_us:link, a._sign_us:visited {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    text-align: center;
+	text-decoration:none;
+    display: inline-block;
+}
+a._sign_us:hover, a._sign_us:active {
+    background-color: white;
+    color: black;
+}
+#signup_td{
+	padding:29px 30px 5px 0px;
+}
+#signup{
+	font-size:12px;
+	letter-spacing:3px;
+    padding:18px 59px 18px 59px;
+}
+
+/*contact*/
+table.black3{
+	border:1px solid gray;
+	position:absolute;
+	top:920px;
+	
+	width:1170px;
+	height:330px;
+	color:white;
+	background-color:black;
+}
+th.blank{
+	width:40px;
+}
+th.black3_th{
+	font-size:17px;
+	letter-spacing:3px;
+	text-align:left;
+	color:rgb(181,155,74);
+	padding-top:20px;
+}
+tr.city{
+	font-size:15px;
+	letter-spacing:3px;
+}
+td.addrdata{
+	font-size:12px;
+	padding-bottom:20px;
+}
+td.infodata{
+	font-size:12px;
+	padding-bottom:50px;
+}
+
+#contact_td{
+	text-align:left;
+	width:195px;
+	height:60px;
+	padding-bottom:50px;	
+}
+#contact{
+	font-size:12px;
+	letter-spacing:2px;
+    padding:10px 39px 10px 39px;
+}
+#info1{
+	font-size:12px;
+	width:180px;
+	padding-bottom:25px;
+}
+span.colour{
+	color:rgb(181,155,74);
+}
+a.mail:visited, a.mail:link{
+	color:white;
+	text-decoration:underline;
+}
