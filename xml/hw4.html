@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Homework 4</title>
+
+<!--CSS File-->
+<style>
+#header{
+	font-size:20px;
+	font-family:"Times New Roman";
+	font-weight:bold;
+	text-align:center;
+	margin-top:100px;
+}
+
+input[type=text]{
+	width:180px;
+	height:20px;	
+	display:block;
+	margin:auto;
+	margin-top:20px;
+	border:1px solid gray;
+}
+input[type=text]:focus {
+    border: 2px solid rgb(200,220,235);
+	border-radius:3px;
+}
+
+input[type=button]{
+	width:100px;
+	height:20px;	
+	background-color:rgb(190,190,190);
+	border:1px solid rgb(170,170,170);
+	border-radius: 3px;
+	font-family:arial;	
+	display:block;
+	margin:auto;	
+}
+input[type=button]:active{
+	color:white;
+}
+
+</style>
+
+<script language="JavaScript1.2">
+function viewXML(what)
+{	var URL = what.URL.value;	
+	function loadXML(url) {
+		if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest(); }
+		else {// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); }
+		xmlhttp.open("GET",url,false);
+		xmlhttp.send();
+		xmlDoc=xmlhttp.responseXML;
+		return xmlDoc; 
+	}
+	xmlDoc = loadXML(URL);
+	if(xmlDoc==null)
+		alert("Error in XML file");
+		
+	if (window.ActiveXObject) //if IE, simply execute script (due to async prop).
+	{
+		if (xmlDoc.parseError.errorCode != 0) {
+			var myErr = xmlDoc.parseError;
+			generateError(xmlDoc);
+			hWin = window.open("", "Error", "height=1080,width=1920");
+			hWin.document.write(html_text);} 
+		else { 
+			generateHTML(xmlDoc);
+			hWin = window.open("", "Assignment4", "height=1080,width=1920");
+			hWin.document.write(html_text); }
+	} 
+	else //else if FF, execute script once XML object has loaded
+	{ 
+		xmlDoc.onload=generateHTML(xmlDoc);
+		hWin = window.open("", "Assignment4", "height=1080,width=1920");
+		hWin.document.write(html_text); 	
+	}
+	hWin.document.close();
+}
+
+function generateHTML(xmlDoc)
+{ 	ELEMENT_NODE = 1; // MS parser doesn't define Node.ELEMENT_NODE
+	root=xmlDoc.DocumentElement;
+	html_text="<html><head><title>XML Parse Result</title></head><body>";
+	html_text+="<table border='2' style='font-family:Times New Roman';>";
+	headerElems=xmlDoc.getElementsByTagName("Header");
+	if(headerElems.length==0)
+		alert("Error in XML file");
+	headerData=headerElems.item(0).childNodes;
+	rowElems=xmlDoc.getElementsByTagName("Row");	
+	if(rowElems.length==0)
+		alert("Error in XML file");
+	rowData=headerElems.item(0).childNodes;
+	
+	html_text+="<tbody>";
+	html_text+="<tr>";
+	// output the headers
+	for(i=0;i<headerData.length;i++)
+	{ if(headerData.item(i).nodeType==ELEMENT_NODE)
+		{
+			header=headerData.item(i).firstChild.nodeValue;
+			html_text+="<th>"+header+"</th>"; 
+		} 
+	}
+	html_text+="</tr>";
+	// output out the values
+	for(i=0;i<rowElems.length;i++) //do for all planes
+	{ 	rowData=rowElems.item(i).childNodes; //get properties of a plane
+		html_text+="<tr>"; //start a new row of the output table
+		for(j=0;j<rowData.length;j++)
+		{ if(rowData.item(j).nodeType==ELEMENT_NODE)
+			{ 
+			if(rowData.item(j).nodeName=="Airline")
+			{
+				if(rowData.item(j).firstChild==null)						
+					html_text+="<td></td>";	
+				else
+					html_text+="<td width='50'>"+rowData.item(j).firstChild.nodeValue+"</td>";
+			}
+			else if(rowData.item(j).nodeName=="IATA")
+			{
+				if(rowData.item(j).firstChild==null)						
+					html_text+="<td></td>";	
+				else
+					html_text+="<td width='20'>"+rowData.item(j).firstChild.nodeValue+"</td>";				
+			}
+			else if(rowData.item(j).nodeName=="Hubs")
+			{//handle hubs separately
+				if(rowData.item(j).firstChild==null)						
+					html_text+="<td></td>";	
+				else{
+				hubData=rowData.item(j).childNodes;
+				html_text+="<td width='100'><ul>";
+				for(k=0;k<hubData.length;k++)
+				{ if(hubData.item(k).nodeType==ELEMENT_NODE)
+					if(hubData.item(k).nodeName=="Hub")
+					  if(hubData.item(k).firstChild==null)
+						{html_text+="<li></li>";}
+					  else{
+						if(k==1)
+						html_text+="<li style='font-weight:bold;'>"+hubData.item(k).firstChild.nodeValue+"</li>";
+						else
+						html_text+="<li>"+hubData.item(k).firstChild.nodeValue+"</li>";}
+				}	
+				html_text+="</ul></td>";}
+			}
+			else if(rowData.item(j).nodeName=="Notes")
+			{//handle notes separately
+				if(rowData.item(j).firstChild==null)						
+					html_text+="<td></td>";				
+				else				
+					html_text+="<td width='240'>"+rowData.item(j).firstChild.nodeValue+"</td>";
+			}					
+			else if(rowData.item(j).nodeName=="HomePage")
+			{//handle homepage separately
+				if(rowData.item(j).firstChild==null)						
+					html_text+="<td></td>";	
+				else
+					html_text+="<td><a href='"+rowData.item(j).firstChild.nodeValue+"'>"+rowData.item(j).firstChild.nodeValue+"</a></td>";
+			}
+			else if(rowData.item(j).nodeName=="Plane")
+			{//handle images separately
+				if(rowData.item(j).firstChild==null)						
+					html_text+="<td></td>";	
+				else
+					html_text+="<td width='300'><img src='"+rowData.item(j).firstChild.nodeValue+"' width='300'height='150'></td>"; }
+			} 
+		}
+		html_text+="</tr>"; 
+	}
+	html_text+="</tbody>"; html_text+="</table>";
+	html_text+="</body></html>"; }
+	 
+function pressKey(event){
+	if(event.keyCode==13)
+	{
+		viewXML(document.getElementById("location"));
+	}
+}
+</script>
+</head>
+
+<body >
+<div id="header">Enter URL for Airlines List XML File</div>
+<form name="myform" method="POST" id="location">
+<input type="text" name="URL" onkeydown="pressKey(event)" maxlength="255" size="100"/>
+<br />
+<input type="button" name="submit" value="Submit Query" onClick="viewXML(this.form)" />
+</form>
+</body>
+</html>
